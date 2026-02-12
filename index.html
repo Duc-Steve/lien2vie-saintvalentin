@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#ff4d6d" />
+  <title>Saint-Valentin 2026 — Lien2vie ❤️</title>
+  <style>
+    :root{
+      --bg1:#2b1055;
+      --bg2:#ff4d6d;
+      --bg3:#ffb3c7;
+      --card:rgba(255,255,255,.12);
+      --card2:rgba(255,255,255,.08);
+      --text:rgba(255,255,255,.95);
+      --muted:rgba(255,255,255,.78);
+      --accent:#ff4d6d;
+      --accent2:#ffd1dc;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 26px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      overflow:hidden;
+      background:
+        radial-gradient(1100px 800px at 20% 20%, rgba(255,77,109,.35), transparent 60%),
+        radial-gradient(900px 700px at 85% 30%, rgba(255,179,199,.22), transparent 55%),
+        radial-gradient(700px 600px at 60% 90%, rgba(255,209,220,.18), transparent 60%),
+        linear-gradient(135deg, var(--bg1), #3a0f5c 35%, #7a1d58 65%, var(--bg2));
+      position:relative;
+    }
+
+    /* Soft bokeh lights */
+    .bokeh{
+      position:absolute; inset:0;
+      pointer-events:none;
+      filter: blur(1px);
+      opacity:.75;
+    }
+    .bokeh span{
+      position:absolute;
+      width: clamp(120px, 18vw, 220px);
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.28), rgba(255,255,255,0) 60%);
+      mix-blend-mode: screen;
+      animation: floaty 12s ease-in-out infinite;
+    }
+    .bokeh span:nth-child(1){left:-5%; top:10%; animation-duration: 14s; transform: scale(.9)}
+    .bokeh span:nth-child(2){left:18%; top:65%; animation-duration: 18s; transform: scale(1.1)}
+    .bokeh span:nth-child(3){left:60%; top:5%; animation-duration: 16s; transform: scale(.75)}
+    .bokeh span:nth-child(4){left:78%; top:55%; animation-duration: 20s; transform: scale(1.2)}
+    .bokeh span:nth-child(5){left:35%; top:25%; animation-duration: 22s; transform: scale(.95)}
+    @keyframes floaty{
+      0%,100%{transform: translateY(0) translateX(0) scale(var(--s,1))}
+      50%{transform: translateY(-22px) translateX(12px) scale(var(--s,1))}
+    }
+
+    /* Main layout */
+    .wrap{
+      position:relative;
+      height:100%;
+      display:grid;
+      place-items:center;
+      padding: 22px;
+    }
+
+    .card{
+      width: min(560px, 94vw);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* subtle shimmer */
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 260px at -10% -10%, rgba(255,255,255,.22), transparent 60%),
+        radial-gradient(500px 220px at 110% 20%, rgba(255,209,220,.18), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .content{
+      position:relative;
+      padding: 22px 22px 18px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      font-weight:600;
+      letter-spacing:.2px;
+      color: rgba(255,255,255,.88);
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    }
+
+    .badge .dot{
+      width:10px; height:10px; border-radius:99px;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--accent));
+      box-shadow: 0 0 18px rgba(255,77,109,.65);
+    }
+
+    h1{
+      margin: 14px 0 6px;
+      font-size: clamp(26px, 4.3vw, 38px);
+      line-height: 1.1;
+      letter-spacing: .2px;
+      text-shadow: 0 10px 24px rgba(0,0,0,.25);
+    }
+
+    .subtitle{
+      margin: 0 0 14px;
+      font-size: clamp(14px, 2.6vw, 16px);
+      color: var(--muted);
+      letter-spacing:.3px;
+    }
+
+    .message{
+      margin-top: 10px;
+      padding: 14px 14px 12px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.14);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .message p{
+      margin: 0 0 10px;
+      font-size: clamp(15px, 2.7vw, 17px);
+      line-height: 1.6;
+      color: rgba(255,255,255,.92);
+    }
+
+    .typewriter{
+      font-weight:700;
+      color: rgba(255,255,255,.98);
+      display:inline-block;
+      border-right: 2px solid rgba(255,255,255,.9);
+      padding-right: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 0ch;
+      animation: typing 3.6s steps(40, end) forwards, caret .85s step-end infinite;
+    }
+    @keyframes typing{
+      from{max-width:0ch}
+      to{max-width: 42ch}
+    }
+    @keyframes caret{
+      50%{border-color: transparent}
+    }
+
+    .sig{
+      margin-top: 8px !important;
+      text-align:right;
+      font-weight:700;
+      color: rgba(255,255,255,.9);
+      letter-spacing:.2px;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-top: 14px;
+    }
+
+    .btn{
+      appearance:none;
+      border:0;
+      cursor:pointer;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-weight:800;
+      letter-spacing:.2px;
+      color: rgba(255,255,255,.95);
+      background: linear-gradient(135deg, rgba(255,77,109,.95), rgba(255,179,199,.65));
+      box-shadow: 0 14px 40px rgba(255,77,109,.25);
+      transition: transform .15s ease, filter .15s ease;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); filter: brightness(1.04)}
+    .btn:active{transform: translateY(0px) scale(.99)}
+    .hint{
+      font-size: 12.5px;
+      color: rgba(255,255,255,.7);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .pulse{
+      width: 9px; height: 9px; border-radius: 99px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 0 0 0 rgba(255,255,255,.35);
+      animation: ping 1.6s ease-out infinite;
+    }
+    @keyframes ping{
+      0%{box-shadow: 0 0 0 0 rgba(255,255,255,.35)}
+      100%{box-shadow: 0 0 0 14px rgba(255,255,255,0)}
+    }
+
+    /* Cute corner flowers (SVG) */
+    .flowers{
+      position:absolute; inset:0;
+      pointer-events:none;
+      opacity:.95;
+    }
+    .flower{
+      position:absolute;
+      width: 130px;
+      height: 130px;
+      filter: drop-shadow(0 18px 25px rgba(0,0,0,.25));
+      opacity:.9;
+      transform-origin:center;
+      animation: bloom 7s ease-in-out infinite;
+    }
+    .flower.tl{left:-22px; top:-22px; transform: rotate(-10deg) scale(.95); animation-duration: 8s}
+    .flower.br{right:-24px; bottom:-24px; transform: rotate(12deg) scale(1.02); animation-duration: 9s}
+    @keyframes bloom{
+      0%,100%{transform: translateY(0) rotate(var(--r,0deg)) scale(1)}
+      50%{transform: translateY(-6px) rotate(calc(var(--r,0deg) + 3deg)) scale(1.03)}
+    }
+
+    /* Floating hearts background */
+    .hearts, .petals, .confetti{
+      position:absolute; inset:0;
+      pointer-events:none;
+      overflow:hidden;
+    }
+    .heart{
+      position:absolute;
+      width: 16px; height: 16px;
+      transform: translate(-50%, -50%) rotate(45deg);
+      background: rgba(255,255,255,.9);
+      border-radius: 4px;
+      opacity:.65;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.22));
+      animation: rise linear infinite;
+    }
+    .heart::before, .heart::after{
+      content:"";
+      position:absolute;
+      width: 16px; height: 16px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .heart::before{left:-8px; top:0}
+    .heart::after{left:0; top:-8px}
+
+    @keyframes rise{
+      0%{transform: translate(-50%, 0) rotate(45deg) scale(var(--sc,1)); opacity:0}
+      10%{opacity:.72}
+      100%{transform: translate(-50%, -120vh) rotate(45deg) scale(var(--sc,1)); opacity:0}
+    }
+
+    /* Falling petals */
+    .petal{
+      position:absolute;
+      width: 18px; height: 12px;
+      border-radius: 999px 999px 999px 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(255,179,199,.75) 55%, rgba(255,77,109,.25));
+      opacity:.55;
+      transform: translate(-50%, -20px) rotate(var(--rot,0deg));
+      filter: drop-shadow(0 12px 16px rgba(0,0,0,.18));
+      animation: fall linear infinite;
+    }
+    @keyframes fall{
+      0%{transform: translate(-50%, -30px) rotate(var(--rot,0deg))}
+      100%{transform: translate(calc(-50% + var(--drift, 0px)), 110vh) rotate(calc(var(--rot,0deg) + 220deg))}
+    }
+
+    /* Surprise confetti hearts */
+    .confetti-heart{
+      position:absolute;
+      width: 12px; height: 12px;
+      transform: translate(-50%,-50%) rotate(45deg);
+      background: rgba(255,255,255,.95);
+      border-radius: 3px;
+      filter: drop-shadow(0 10px 16px rgba(0,0,0,.22));
+      animation: pop 900ms cubic-bezier(.2,.8,.2,1) forwards;
+      opacity:.9;
+    }
+    .confetti-heart::before, .confetti-heart::after{
+      content:"";
+      position:absolute;
+      width: 12px; height: 12px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .confetti-heart::before{left:-6px; top:0}
+    .confetti-heart::after{left:0; top:-6px}
+    @keyframes pop{
+      0%{transform: translate(-50%,-50%) rotate(45deg) scale(.7); opacity:0}
+      10%{opacity:1}
+      100%{transform: translate(calc(-50% + var(--vx,0px)), calc(-50% + var(--vy,0px))) rotate(45deg) scale(1); opacity:0}
+    }
+
+    /* Footer tiny note */
+    .footer{
+      margin-top: 12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      color: rgba(255,255,255,.72);
+      font-size: 12.5px;
+      letter-spacing:.2px;
+    }
+    .tag{
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition: none !important}
+      body{overflow:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bokeh" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="hearts" aria-hidden="true" id="hearts"></div>
+  <div class="petals" aria-hidden="true" id="petals"></div>
+  <div class="confetti" aria-hidden="true" id="confetti"></div>
+
+  <main class="wrap">
+    <section class="card" role="article" aria-label="Carte Saint-Valentin">
+      <svg class="flowers flower tl" viewBox="0 0 200 200" aria-hidden="true" style="--r:-10deg">
+        <!-- Simple stylized flower -->
+        <defs>
+          <radialGradient id="petalA" cx="35%" cy="30%">
+            <stop offset="0%" stop-color="rgba(255,255,255,.95)"/>
+            <stop offset="55%" stop-color="rgba(255,209,220,.95)"/>
+            <stop offset="100%" stop-color="rgba(255,77,109,.55)"/>
+          </radialGradient>
+          <radialGradient id="centerA" cx="40%" cy="35%">
+            <stop offset="0%" stop-color="rgba(255,255,255,.95)"/>
+            <stop offset="70%" stop-color="rgba(255,179,199,.95)"/>
+            <stop offset="100%" stop-color="rgba(255,77,109,.75)"/>
+          </radialGradient>
+        </defs>
+        <g transform="translate(100 100)">
+          <g opacity=".95">
+            <ellipse rx="22" ry="54" fill="url(#petalA)" transform="rotate(0) translate(0 -36)"/>
+            <ellipse rx="22" ry="54" fill="url(#petalA)" transform="rotate(45) translate(0 -36)"/>
+            <ellipse rx="22" ry="54" fill="url(#petalA)" transform="rotate(90) translate(0 -36)"/>
+            <ellipse rx="22" ry="54" fill="url(#petalA)" transform="rotate(135) translate(0 -36)"/>
+            <ellipse rx="22" ry="54" fill="url(#petalA)" transform="rotate(180) translate(0 -36)"/>
+            <ellipse rx="22" ry="54" fill="url(#petalA)" transform="rotate(225) translate(0 -36)"/>
+            <ellipse rx="22" ry="54" fill="url(#petalA)" transform="rotate(270) translate(0 -36)"/>
+            <ellipse rx="22" ry="54" fill="url(#petalA)" transform="rotate(315) translate(0 -36)"/>
+          </g>
+          <circle r="20" fill="url(#centerA)" opacity=".95"/>
+          <circle r="7" fill="rgba(255,255,255,.85)" opacity=".9"/>
+        </g>
+      </svg>
+
+      <svg class="flowers flower br" viewBox="0 0 200 200" aria-hidden="true" style="--r:12deg">
+        <defs>
+          <radialGradient id="petalB" cx="35%" cy="30%">
+            <stop offset="0%" stop-color="rgba(255,255,255,.95)"/>
+            <stop offset="55%" stop-color="rgba(255,209,220,.90)"/>
+            <stop offset="100%" stop-color="rgba(255,77,109,.50)"/>
+          </radialGradient>
+          <radialGradient id="centerB" cx="40%" cy="35%">
+            <stop offset="0%" stop-color="rgba(255,255,255,.95)"/>
+            <stop offset="70%" stop-color="rgba(255,179,199,.95)"/>
+            <stop offset="100%" stop-color="rgba(255,77,109,.75)"/>
+          </radialGradient>
+        </defs>
+        <g transform="translate(100 100)">
+          <g opacity=".95">
+            <ellipse rx="20" ry="50" fill="url(#petalB)" transform="rotate(15) translate(0 -34)"/>
+            <ellipse rx="20" ry="50" fill="url(#petalB)" transform="rotate(60) translate(0 -34)"/>
+            <ellipse rx="20" ry="50" fill="url(#petalB)" transform="rotate(105) translate(0 -34)"/>
+            <ellipse rx="20" ry="50" fill="url(#petalB)" transform="rotate(150) translate(0 -34)"/>
+            <ellipse rx="20" ry="50" fill="url(#petalB)" transform="rotate(195) translate(0 -34)"/>
+            <ellipse rx="20" ry="50" fill="url(#petalB)" transform="rotate(240) translate(0 -34)"/>
+            <ellipse rx="20" ry="50" fill="url(#petalB)" transform="rotate(285) translate(0 -34)"/>
+            <ellipse rx="20" ry="50" fill="url(#petalB)" transform="rotate(330) translate(0 -34)"/>
+          </g>
+          <circle r="19" fill="url(#centerB)" opacity=".95"/>
+          <circle r="6.5" fill="rgba(255,255,255,.85)" opacity=".9"/>
+        </g>
+      </svg>
+
+      <div class="content">
+        <div class="badge" aria-label="Surnom du couple">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="coupleNick">Lien2vie</span>
+          <span aria-hidden="true">💞</span>
+        </div>
+
+        <h1 id="title">Joyeuse Saint-Valentin 2026 ❤️</h1>
+        <div class="subtitle" id="subtitle">Notre première Saint-Valentin ensemble</div>
+
+        <div class="message" role="note" aria-label="Message d'amour">
+          <p>
+            <span class="typewriter" id="typeLine">Je t’aime plus que les mots ne savent le dire.</span>
+          </p>
+          <p id="mainMessage">
+            Aujourd’hui, je veux juste te dire merci d’être entrée dans ma vie.
+            Avec toi, tout devient plus doux, plus vrai, plus beau.
+            J’ai envie de construire avec toi une histoire simple, solide, et pleine de moments qui comptent.
+          </p>
+          <p class="sig" id="signature">— Ton amoureux</p>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="surpriseBtn" type="button" aria-label="Déclencher une surprise">
+            Clique pour une surprise ✨
+          </button>
+          <div class="hint" aria-hidden="true">
+            <span class="pulse"></span>
+            <span>Des cœurs & fleurs pour toi…</span>
+          </div>
+        </div>
+
+        <div class="footer" aria-hidden="true">
+          <span class="tag" id="tagLeft">2026 • Lien2vie</span>
+          <span class="tag" id="tagRight">❤️</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // =========================
+    // Personnalisation simple ✨
+    // =========================
+    const coupleNickname = "Lien2vie";
+    const herName = "Ma chérie";
+    const myName = "Ton amoureux";
+    const firstValentineYear = 2026;
+
+    // Tu peux remplacer ce texte par ton propre message.
+    const customMessage =
+      `Aujourd’hui, je veux juste te dire merci d’être entrée dans ma vie, ${herName}.
+Avec toi, tout devient plus doux, plus vrai, plus beau.
+C’est notre première Saint-Valentin ensemble, et j’ai envie d’en vivre mille autres avec toi.
+On va construire des souvenirs magnifiques, main dans la main.`;
+
+    // Ligne “typewriter” (courte, romantique)
+    const typewriterLine = "Je t’aime plus que les mots ne savent le dire.";
+
+    // =========================
+    // Helpers
+    // =========================
+    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+    function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
+
+    // =========================
+    // Inject content
+    // =========================
+    document.getElementById("coupleNick").textContent = coupleNickname;
+    document.getElementById("title").textContent = `Joyeuse Saint-Valentin ${firstValentineYear} ❤️`;
+    document.getElementById("subtitle").textContent = "Notre première Saint-Valentin ensemble";
+    document.getElementById("mainMessage").textContent = customMessage;
+    document.getElementById("signature").textContent = `— ${myName}`;
+    document.getElementById("typeLine").textContent = typewriterLine;
+    document.getElementById("tagLeft").textContent = `${firstValentineYear} • ${coupleNickname}`;
+
+    // If reduced motion: remove typewriter border/caret effect visually
+    if (reduceMotion) {
+      const tw = document.getElementById("typeLine");
+      tw.style.borderRight = "0";
+      tw.style.maxWidth = "unset";
+    }
+
+    // =========================
+    // Floating hearts generator
+    // =========================
+    const heartsLayer = document.getElementById("hearts");
+    function spawnHeart() {
+      const el = document.createElement("div");
+      el.className = "heart";
+      const left = rand(0, 100);
+      const dur = rand(7.5, 14);
+      const sc = rand(0.7, 1.35);
+      const delay = rand(0, 2.0);
+
+      el.style.left = left + "vw";
+      el.style.bottom = "-10vh";
+      el.style.animationDuration = dur + "s";
+      el.style.animationDelay = delay + "s";
+      el.style.setProperty("--sc", sc.toFixed(2));
+
+      // Slight variation in brightness via opacity
+      el.style.opacity = String(rand(0.35, 0.75));
+
+      heartsLayer.appendChild(el);
+      // Clean after animation
+      const ttl = (dur + delay) * 1000;
+      setTimeout(() => el.remove(), ttl + 400);
+    }
+
+    // =========================
+    // Falling petals generator
+    // =========================
+    const petalsLayer = document.getElementById("petals");
+    function spawnPetal() {
+      const el = document.createElement("div");
+      el.className = "petal";
+      const left = rand(0, 100);
+      const dur = rand(9, 17);
+      const drift = rand(-60, 60);
+      const rot = rand(-40, 40);
+      const delay = rand(0, 2.0);
+
+      el.style.left = left + "vw";
+      el.style.top = "-5vh";
+      el.style.animationDuration = dur + "s";
+      el.style.animationDelay = delay + "s";
+      el.style.setProperty("--drift", drift.toFixed(0) + "px");
+      el.style.setProperty("--rot", rot.toFixed(0) + "deg");
+      el.style.opacity = String(rand(0.28, 0.6));
+      el.style.transform = `translate(-50%, -20px) rotate(${rot}deg)`;
+
+      petalsLayer.appendChild(el);
+      const ttl = (dur + delay) * 1000;
+      setTimeout(() => el.remove(), ttl + 400);
+    }
+
+    // Start ambient animations (gentle)
+    if (!reduceMotion) {
+      // hearts
+      const heartInterval = setInterval(spawnHeart, 520);
+      // petals
+      const petalInterval = setInterval(spawnPetal, 780);
+
+      // Spawn a few immediately
+      for (let i = 0; i < 10; i++) spawnHeart();
+      for (let i = 0; i < 8; i++) spawnPetal();
+
+      // Keep references just in case (not strictly needed)
+      window.__ambient = { heartInterval, petalInterval };
+    }
+
+    // =========================
+    // Surprise: confetti hearts burst + gentle shake glow
+    // =========================
+    const confettiLayer = document.getElementById("confetti");
+    const btn = document.getElementById("surpriseBtn");
+
+    function burstConfettiHearts(x, y) {
+      const count = 36;
+      const spread = 260; // px
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement("div");
+        el.className = "confetti-heart";
+
+        el.style.left = x + "px";
+        el.style.top = y + "px";
+
+        // random velocity
+        const angle = rand(0, Math.PI * 2);
+        const radius = rand(spread * 0.35, spread);
+        const vx = Math.cos(angle) * radius;
+        const vy = Math.sin(angle) * radius - rand(40, 160); // upward bias
+
+        el.style.setProperty("--vx", vx.toFixed(0) + "px");
+        el.style.setProperty("--vy", vy.toFixed(0) + "px");
+
+        // small scale variation
+        const s = rand(0.75, 1.35);
+        el.style.transform = `translate(-50%,-50%) rotate(45deg) scale(${s.toFixed(2)})`;
+
+        // brightness variation
+        el.style.opacity = String(rand(0.75, 0.98));
+
+        confettiLayer.appendChild(el);
+        setTimeout(() => el.remove(), 1000);
+      }
+    }
+
+    function gentleHighlightCard() {
+      const card = document.querySelector(".card");
+      card.animate(
+        [
+          { transform: "translateY(0px) scale(1)", filter: "brightness(1)" },
+          { transform: "translateY(-2px) scale(1.01)", filter: "brightness(1.05)" },
+          { transform: "translateY(0px) scale(1)", filter: "brightness(1)" }
+        ],
+        { duration: 900, easing: "cubic-bezier(.2,.8,.2,1)" }
+      );
+    }
+
+    btn.addEventListener("click", (e) => {
+      if (reduceMotion) return;
+
+      const rect = btn.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+
+      burstConfettiHearts(x, y);
+      gentleHighlightCard();
+
+      // Also spawn a short wave of hearts for a romantic boost
+      let n = 0;
+      const wave = setInterval(() => {
+        spawnHeart();
+        spawnPetal();
+        n++;
+        if (n >= 8) clearInterval(wave);
+      }, 120);
+    });
+
+    // =========================
+    // Make sure overflow stays clean on resize
+    // =========================
+    window.addEventListener("resize", () => {
+      // no-op: elements are viewport-based; kept for stability.
+    });
+  </script>
+</body>
+  </html>
