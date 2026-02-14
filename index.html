@@ -26,7 +26,10 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
-      overflow:hidden;
+
+      /* ✅ responsive: on autorise le scroll si la hauteur manque */
+      overflow:auto;
+
       background:
         radial-gradient(1100px 800px at 20% 20%, rgba(255,77,109,.35), transparent 60%),
         radial-gradient(900px 700px at 85% 30%, rgba(255,179,199,.22), transparent 55%),
@@ -37,10 +40,11 @@
 
     /* Soft bokeh lights */
     .bokeh{
-      position:absolute; inset:0;
+      position:fixed; inset:0;
       pointer-events:none;
       filter: blur(1px);
       opacity:.75;
+      z-index:0;
     }
     .bokeh span{
       position:absolute;
@@ -61,17 +65,26 @@
       50%{transform: translateY(-22px) translateX(12px) scale(var(--s,1))}
     }
 
+    /* Layers */
+    .hearts, .petals, .confetti{
+      position:fixed; inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:1;
+    }
+
     /* Main layout */
     .wrap{
       position:relative;
-      height:100%;
+      min-height:100%;
       display:grid;
       place-items:center;
       padding: 22px;
+      z-index:2;
     }
 
     .card{
-      width: min(560px, 94vw);
+      width: min(640px, 96vw);
       background: linear-gradient(180deg, var(--card), var(--card2));
       border: 1px solid rgba(255,255,255,.18);
       border-radius: var(--radius);
@@ -120,7 +133,7 @@
 
     h1{
       margin: 14px 0 6px;
-      font-size: clamp(26px, 4.3vw, 38px);
+      font-size: clamp(26px, 4.3vw, 40px);
       line-height: 1.1;
       letter-spacing: .2px;
       text-shadow: 0 10px 24px rgba(0,0,0,.25);
@@ -144,12 +157,12 @@
     .message p{
       margin: 0 0 10px;
       font-size: clamp(15px, 2.7vw, 17px);
-      line-height: 1.6;
+      line-height: 1.65;
       color: rgba(255,255,255,.92);
     }
 
     .typewriter{
-      font-weight:700;
+      font-weight:800;
       color: rgba(255,255,255,.98);
       display:inline-block;
       border-right: 2px solid rgba(255,255,255,.9);
@@ -157,11 +170,11 @@
       white-space: nowrap;
       overflow: hidden;
       max-width: 0ch;
-      animation: typing 3.6s steps(40, end) forwards, caret .85s step-end infinite;
+      animation: typing 4s steps(46, end) forwards, caret .85s step-end infinite;
     }
     @keyframes typing{
       from{max-width:0ch}
-      to{max-width: 42ch}
+      to{max-width: 52ch}
     }
     @keyframes caret{
       50%{border-color: transparent}
@@ -170,7 +183,7 @@
     .sig{
       margin-top: 8px !important;
       text-align:right;
-      font-weight:700;
+      font-weight:800;
       color: rgba(255,255,255,.9);
       letter-spacing:.2px;
     }
@@ -190,22 +203,32 @@
       cursor:pointer;
       padding: 12px 16px;
       border-radius: 16px;
-      font-weight:800;
+      font-weight:900;
       letter-spacing:.2px;
       color: rgba(255,255,255,.95);
       background: linear-gradient(135deg, rgba(255,77,109,.95), rgba(255,179,199,.65));
       box-shadow: 0 14px 40px rgba(255,77,109,.25);
       transition: transform .15s ease, filter .15s ease;
       user-select:none;
+      width: fit-content;
     }
     .btn:hover{transform: translateY(-1px); filter: brightness(1.04)}
     .btn:active{transform: translateY(0px) scale(.99)}
+
+    .btn.secondary{
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 14px 40px rgba(0,0,0,.18);
+      font-weight:800;
+    }
+
     .hint{
       font-size: 12.5px;
       color: rgba(255,255,255,.7);
       display:flex;
       align-items:center;
       gap:10px;
+      min-width: 180px;
     }
     .pulse{
       width: 9px; height: 9px; border-radius: 99px;
@@ -241,11 +264,6 @@
     }
 
     /* Floating hearts background */
-    .hearts, .petals, .confetti{
-      position:absolute; inset:0;
-      pointer-events:none;
-      overflow:hidden;
-    }
     .heart{
       position:absolute;
       width: 16px; height: 16px;
@@ -265,7 +283,6 @@
     }
     .heart::before{left:-8px; top:0}
     .heart::after{left:0; top:-8px}
-
     @keyframes rise{
       0%{transform: translate(-50%, 0) rotate(45deg) scale(var(--sc,1)); opacity:0}
       10%{opacity:.72}
@@ -276,7 +293,7 @@
     .petal{
       position:absolute;
       width: 18px; height: 12px;
-      border-radius: 999px 999px 999px 999px;
+      border-radius: 999px;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(255,179,199,.75) 55%, rgba(255,77,109,.25));
       opacity:.55;
       transform: translate(-50%, -20px) rotate(var(--rot,0deg));
@@ -324,6 +341,7 @@
       color: rgba(255,255,255,.72);
       font-size: 12.5px;
       letter-spacing:.2px;
+      flex-wrap:wrap;
     }
     .tag{
       padding: 6px 10px;
@@ -332,10 +350,117 @@
       border: 1px solid rgba(255,255,255,.14);
     }
 
+    /* ✅ VIDEO BLOCK (responsive) */
+    .videoBlock{
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.14);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .videoHeader{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+
+    .videoHeader h2{
+      font-size: 14px;
+      margin:0;
+      letter-spacing:.2px;
+      color: rgba(255,255,255,.90);
+    }
+
+    .playerShell{
+      width:100%;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+    }
+
+    /* Ratio 16:9 */
+    .playerRatio{
+      position:relative;
+      width:100%;
+      padding-top: 56.25%;
+    }
+    #player{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+    }
+
+    .trimGrid{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .field{
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    label{
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+    }
+    .row{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    input[type="number"]{
+      width:110px;
+      padding: 10px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.20);
+      color: rgba(255,255,255,.92);
+      outline:none;
+    }
+    input[type="range"]{
+      width: 100%;
+      accent-color: var(--accent);
+    }
+    .mini{
+      font-size: 12px;
+      color: rgba(255,255,255,.70);
+    }
+
+    .videoControls{
+      margin-top: 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    /* ✅ Mobile tweaks */
+    @media (max-width: 520px){
+      .content{padding: 18px 16px 16px}
+      .actions{gap:10px}
+      .btn{width:100%}
+      .hint{min-width: unset}
+      .trimGrid{grid-template-columns: 1fr}
+      input[type="number"]{width: 100%}
+    }
+
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       *{animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition: none !important}
-      body{overflow:auto}
     }
   </style>
 </head>
@@ -351,8 +476,9 @@
 
   <main class="wrap">
     <section class="card" role="article" aria-label="Carte Saint-Valentin">
+
+      <!-- fleurs -->
       <svg class="flowers flower tl" viewBox="0 0 200 200" aria-hidden="true" style="--r:-10deg">
-        <!-- Simple stylized flower -->
         <defs>
           <radialGradient id="petalA" cx="35%" cy="30%">
             <stop offset="0%" stop-color="rgba(255,255,255,.95)"/>
@@ -422,14 +548,57 @@
 
         <div class="message" role="note" aria-label="Message d'amour">
           <p>
-            <span class="typewriter" id="typeLine">Je t’aime plus que les mots ne savent le dire.</span>
+            <span class="typewriter" id="typeLine">Quand je pense à toi, tout devient lumière.</span>
           </p>
-          <p id="mainMessage">
-            Aujourd’hui, je veux juste te dire merci d’être entrée dans ma vie.
-            Avec toi, tout devient plus doux, plus vrai, plus beau.
-            J’ai envie de construire avec toi une histoire simple, solide, et pleine de moments qui comptent.
-          </p>
+          <p id="mainMessage"></p>
           <p class="sig" id="signature">— Ton amoureux</p>
+        </div>
+
+        <!-- ✅ VIDEO + “coupe” (début/fin) -->
+        <div class="videoBlock" role="region" aria-label="Vidéo d'amour">
+          <div class="videoHeader">
+            <h2>Notre chanson / notre moment 🎬</h2>
+            <button class="btn secondary" id="toggleVideo" type="button">Afficher / Masquer</button>
+          </div>
+
+          <div id="videoArea">
+            <div class="playerShell">
+              <div class="playerRatio">
+                <div id="player" aria-label="Lecteur vidéo"></div>
+              </div>
+            </div>
+
+            <div class="trimGrid" aria-label="Réglages de coupe">
+              <div class="field">
+                <label for="startSec">Début (secondes)</label>
+                <div class="row">
+                  <input id="startSec" type="number" min="0" step="1" value="0" />
+                  <span class="mini" id="startHint">0s</span>
+                </div>
+                <input id="startRange" type="range" min="0" max="300" value="0" />
+              </div>
+
+              <div class="field">
+                <label for="endSec">Fin (secondes)</label>
+                <div class="row">
+                  <input id="endSec" type="number" min="1" step="1" value="60" />
+                  <span class="mini" id="endHint">60s</span>
+                </div>
+                <input id="endRange" type="range" min="1" max="300" value="60" />
+              </div>
+            </div>
+
+            <div class="videoControls">
+              <button class="btn" id="playTrim" type="button">Lire la partie choisie ▶️</button>
+              <button class="btn secondary" id="pauseVid" type="button">Pause ⏸️</button>
+              <div class="mini" id="status">Prêt.</div>
+            </div>
+
+            <div class="footer" aria-hidden="true" style="margin-top:10px">
+              <span class="tag">Astuce : mets “Début” & “Fin” pour ne garder que ton passage préféré.</span>
+              <span class="tag">❤️</span>
+            </div>
+          </div>
         </div>
 
         <div class="actions">
@@ -450,6 +619,9 @@
     </section>
   </main>
 
+  <!-- ✅ YouTube Iframe API (pour contrôler + start/end) -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
   <script>
     // =========================
     // Personnalisation simple ✨
@@ -459,23 +631,29 @@
     const myName = "Ton amoureux";
     const firstValentineYear = 2026;
 
-    // Tu peux remplacer ce texte par ton propre message.
+    // ✅ Texte plus romantique
     const customMessage =
-      `Aujourd’hui, je veux juste te dire merci d’être entrée dans ma vie, ${herName}.
-Avec toi, tout devient plus doux, plus vrai, plus beau.
-C’est notre première Saint-Valentin ensemble, et j’ai envie d’en vivre mille autres avec toi.
-On va construire des souvenirs magnifiques, main dans la main.`;
+`Aujourd’hui, je veux te regarder dans le cœur et te dire merci, ${herName}.
+Merci d’être devenue ce “chez-moi” où je respire mieux, où je souris sans effort.
 
-    // Ligne “typewriter” (courte, romantique)
-    const typewriterLine = "Je t’aime plus que les mots ne savent le dire.";
+Depuis que tu es là, les petits instants ont une saveur nouvelle :
+ta voix apaise mes tempêtes, ton rire allume mes journées,
+et ta présence rend le monde plus tendre.
+
+C’est notre première Saint-Valentin ensemble…
+et je te promets une chose :
+je veux t’aimer avec douceur, te protéger avec force,
+et construire avec toi une histoire belle, simple et solide —
+une histoire où chaque “nous” compte plus que tout.`;
+
+    // ✅ Ligne “typewriter” (courte, puissante)
+    const typewriterLine = "Quand je pense à toi, tout devient lumière.";
 
     // =========================
     // Helpers
     // =========================
     const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     function rand(min, max) { return Math.random() * (max - min) + min; }
-    function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
 
     // =========================
     // Inject content
@@ -512,12 +690,9 @@ On va construire des souvenirs magnifiques, main dans la main.`;
       el.style.animationDuration = dur + "s";
       el.style.animationDelay = delay + "s";
       el.style.setProperty("--sc", sc.toFixed(2));
-
-      // Slight variation in brightness via opacity
       el.style.opacity = String(rand(0.35, 0.75));
 
       heartsLayer.appendChild(el);
-      // Clean after animation
       const ttl = (dur + delay) * 1000;
       setTimeout(() => el.remove(), ttl + 400);
     }
@@ -551,49 +726,37 @@ On va construire des souvenirs magnifiques, main dans la main.`;
 
     // Start ambient animations (gentle)
     if (!reduceMotion) {
-      // hearts
-      const heartInterval = setInterval(spawnHeart, 520);
-      // petals
-      const petalInterval = setInterval(spawnPetal, 780);
-
-      // Spawn a few immediately
+      setInterval(spawnHeart, 520);
+      setInterval(spawnPetal, 780);
       for (let i = 0; i < 10; i++) spawnHeart();
       for (let i = 0; i < 8; i++) spawnPetal();
-
-      // Keep references just in case (not strictly needed)
-      window.__ambient = { heartInterval, petalInterval };
     }
 
     // =========================
-    // Surprise: confetti hearts burst + gentle shake glow
+    // Surprise: confetti hearts burst + gentle highlight
     // =========================
     const confettiLayer = document.getElementById("confetti");
     const btn = document.getElementById("surpriseBtn");
 
     function burstConfettiHearts(x, y) {
       const count = 36;
-      const spread = 260; // px
+      const spread = 260;
       for (let i = 0; i < count; i++) {
         const el = document.createElement("div");
         el.className = "confetti-heart";
-
         el.style.left = x + "px";
         el.style.top = y + "px";
 
-        // random velocity
         const angle = rand(0, Math.PI * 2);
         const radius = rand(spread * 0.35, spread);
         const vx = Math.cos(angle) * radius;
-        const vy = Math.sin(angle) * radius - rand(40, 160); // upward bias
+        const vy = Math.sin(angle) * radius - rand(40, 160);
 
         el.style.setProperty("--vx", vx.toFixed(0) + "px");
         el.style.setProperty("--vy", vy.toFixed(0) + "px");
 
-        // small scale variation
         const s = rand(0.75, 1.35);
         el.style.transform = `translate(-50%,-50%) rotate(45deg) scale(${s.toFixed(2)})`;
-
-        // brightness variation
         el.style.opacity = String(rand(0.75, 0.98));
 
         confettiLayer.appendChild(el);
@@ -623,7 +786,6 @@ On va construire des souvenirs magnifiques, main dans la main.`;
       burstConfettiHearts(x, y);
       gentleHighlightCard();
 
-      // Also spawn a short wave of hearts for a romantic boost
       let n = 0;
       const wave = setInterval(() => {
         spawnHeart();
@@ -634,11 +796,132 @@ On va construire des souvenirs magnifiques, main dans la main.`;
     });
 
     // =========================
-    // Make sure overflow stays clean on resize
+    // ✅ VIDEO: YouTube player + “coupe”
     // =========================
-    window.addEventListener("resize", () => {
-      // no-op: elements are viewport-based; kept for stability.
+    const VIDEO_ID = "EfsiF_AMzJs"; // extrait de ton lien
+    let player = null;
+    let duration = 300; // fallback si durée inconnue
+
+    const startSec = document.getElementById("startSec");
+    const endSec = document.getElementById("endSec");
+    const startRange = document.getElementById("startRange");
+    const endRange = document.getElementById("endRange");
+    const startHint = document.getElementById("startHint");
+    const endHint = document.getElementById("endHint");
+    const status = document.getElementById("status");
+
+    function setStatus(t){ status.textContent = t; }
+
+    function syncHints(){
+      startHint.textContent = `${startSec.value}s`;
+      endHint.textContent = `${endSec.value}s`;
+    }
+
+    function clampTrim(){
+      let s = Math.max(0, parseInt(startSec.value || "0", 10));
+      let e = Math.max(1, parseInt(endSec.value || "1", 10));
+
+      // e doit être > s
+      if (e <= s) e = s + 1;
+
+      // bornes selon durée
+      s = Math.min(s, Math.max(0, Math.floor(duration) - 1));
+      e = Math.min(e, Math.max(1, Math.floor(duration)));
+
+      // reflète dans inputs
+      startSec.value = s;
+      endSec.value = e;
+      startRange.value = s;
+      endRange.value = e;
+
+      syncHints();
+      return { s, e };
+    }
+
+    // YouTube API callback
+    window.onYouTubeIframeAPIReady = function () {
+      player = new YT.Player("player", {
+        videoId: VIDEO_ID,
+        playerVars: {
+          controls: 1,
+          rel: 0,
+          modestbranding: 1,
+          playsinline: 1
+        },
+        events: {
+          onReady: (ev) => {
+            try {
+              duration = ev.target.getDuration() || duration;
+            } catch {}
+            // ajuste les ranges à la durée
+            const max = Math.max(1, Math.floor(duration));
+            startRange.max = max;
+            endRange.max = max;
+
+            // petite valeur par défaut “romantique”
+            endSec.value = Math.min(60, max);
+            endRange.value = endSec.value;
+            clampTrim();
+            setStatus("Vidéo prête. Choisis un début et une fin ❤️");
+          },
+          onStateChange: (ev) => {
+            // si on dépasse la fin, on stoppe (au cas où)
+            if (ev.data === YT.PlayerState.PLAYING) {
+              const { e } = clampTrim();
+              const guard = setInterval(() => {
+                if (!player) return clearInterval(guard);
+                const t = player.getCurrentTime();
+                if (t >= e - 0.15) {
+                  player.pauseVideo();
+                  clearInterval(guard);
+                  setStatus("Fin du passage ✨");
+                }
+              }, 120);
+            }
+          }
+        }
+      });
+    };
+
+    // Interactions trimming
+    function bindTrimInput(){
+      startSec.addEventListener("input", () => { clampTrim(); setStatus("Début mis à jour."); });
+      endSec.addEventListener("input", () => { clampTrim(); setStatus("Fin mise à jour."); });
+      startRange.addEventListener("input", () => { startSec.value = startRange.value; clampTrim(); setStatus("Début mis à jour."); });
+      endRange.addEventListener("input", () => { endSec.value = endRange.value; clampTrim(); setStatus("Fin mise à jour."); });
+    }
+    bindTrimInput();
+
+    // Play trimmed segment
+    document.getElementById("playTrim").addEventListener("click", () => {
+      if (!player) return;
+      const { s, e } = clampTrim();
+      setStatus(`Lecture: ${s}s → ${e}s`);
+      // loadVideoById accepte startSeconds / endSeconds
+      player.loadVideoById({ videoId: VIDEO_ID, startSeconds: s, endSeconds: e });
+      player.playVideo();
     });
+
+    document.getElementById("pauseVid").addEventListener("click", () => {
+      if (!player) return;
+      player.pauseVideo();
+      setStatus("Pause.");
+    });
+
+    // Show/hide video area
+    const toggle = document.getElementById("toggleVideo");
+    const videoArea = document.getElementById("videoArea");
+    let isShown = true;
+    toggle.addEventListener("click", () => {
+      isShown = !isShown;
+      videoArea.style.display = isShown ? "block" : "none";
+      toggle.textContent = isShown ? "Masquer" : "Afficher";
+    });
+
+    // Reduced motion: we still allow video, but we keep everything calm
+    if (reduceMotion) {
+      setStatus("Mode réduit (animations limitées). Vidéo disponible.");
+    }
   </script>
 </body>
-  </html>
+</html>
